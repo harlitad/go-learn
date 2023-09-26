@@ -25,7 +25,7 @@ func main() {
 	var numb32 int32 = 128
 	var numb64 int64 = int64(numb32)
 	var numb8 int8 = int8(numb64)
-	fmt.Println(numb32, numb64, numb8) // belum paham haha
+	fmt.Println(numb32, numb64, numb8) // belum paham
 
 	var full_name string = "Nicholas"
 	var first_char uint8 = full_name[0]
