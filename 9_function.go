@@ -54,14 +54,49 @@ var greet = func(name string) string {
 	return "Hello " + name
 }("John")
 
+// func as parameter
+func greeting_student(name string, callback func(string) bool) string {
+	var result string
+	if greeting_type := callback("student"); greeting_type {
+		result = "Hello Student " + name
+		return result
+	}
+	result = "Hello People " + name
+	return result
+}
+
 func main() {
-	fmt.Println(sum(0.5, 0.1))
+	// func return single value
 	max(1, 2)
-	swap(1, 2)
-	square(5)
-	sumNumbers(1, 2, 3)
+
+	// func return multiple value
+	swapResult1, swapResult2 := swap(1, 2)
+	println(swapResult1, swapResult2)
+
+	// func return predefined value
+	squareResult := square(5)
+	println(squareResult)
+
+	// variadic parameters (unlimited parameter values)
+	sumNumbersResult := sumNumbers(1, 2, 3)
 	numbers := []int{1, 2, 3}
-	sumNumbers(numbers...)
-	squareArea(5)
+	sumNumbersResult2 := sumNumbers(numbers...)
+	println(sumNumbersResult, sumNumbersResult2)
+
+	// closure function, function that assigned to a variable
+	squareAreaResult := squareArea(5)
+	println(squareAreaResult)
+
+	// immediately invoked, below variable "greet" will have value "Hello John"
 	println(greet)
+
+	// func as parameter
+	greeting_student_result := greeting_student("John", func(s string) bool {
+		if s == "student" {
+			return true
+		} else {
+			return false
+		}
+	})
+	println(greeting_student_result)
 }
