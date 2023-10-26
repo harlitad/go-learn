@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 func main() {
 
@@ -18,6 +21,17 @@ func main() {
 		fmt.Println("Out of scope")
 	}
 
+	// if with shorthand
+	type Book struct {
+		Title string
+	}
+	obj := Book{}
+	if err := json.Unmarshal([]byte("abc"), obj); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(obj)
+
+	// switch case
 	switch true {
 	case score <= 60:
 		fmt.Println(text, "D")
