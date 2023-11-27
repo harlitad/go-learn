@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // struct collection of fields
 type Book struct {
@@ -54,4 +57,12 @@ func main() {
 	var bottle Book = Book{"Bottle", "4", "noname", 2009} // create instance of a struct type using a struct literal
 	fmt.Println(bottle)
 
+	fmt.Println("*********Example 5")
+	items := []struct {
+		title   string
+		expired time.Time
+	}{
+		{title: "abc", expired: time.Now()}, {title: "def", expired: time.Now()},
+	}
+	fmt.Println(items)
 }

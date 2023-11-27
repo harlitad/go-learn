@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 
@@ -39,5 +41,4 @@ func main() {
 	var clonedStr = str
 	clonedStr.value = 60
 	fmt.Println(str)
-
 }

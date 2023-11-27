@@ -20,15 +20,17 @@ type Student struct {
 func main() {
 	// object to string using marshall
 	fmt.Println("************ object to string using marshall")
-
+	fmt.Println("************ example 1")
 	rSample1, err := json.Marshal(1)
 	fmt.Println(string(rSample1), err)
 
+	fmt.Println("************ example 2")
 	rSample2, err := json.Marshal("")
 	fmt.Println(string(rSample2), err)
 
+	fmt.Println("************ example 3")
 	sample3 := []book{
-		book{
+		{
 			Title:  "title 1",
 			Author: "author 1",
 			Year:   2000,
@@ -39,6 +41,7 @@ func main() {
 	rSample3, err := json.Marshal(sample3)
 	fmt.Println(string(rSample3), err)
 
+	fmt.Println("************ example 4")
 	rSample4, err := json.MarshalIndent(sample3, "", " ")
 	fmt.Println(string(rSample4))
 
@@ -50,7 +53,6 @@ func main() {
 
 	// json string to object using unmarshall
 	fmt.Println("************ json string to object using unmarshall")
-
 	student := Student{}
 	strStudent := `{"name": "budi", "id": "1"}`
 	// student should be passing as pointer to assign the value in the same address
