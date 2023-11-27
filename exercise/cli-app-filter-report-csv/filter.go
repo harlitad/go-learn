@@ -56,7 +56,7 @@ func filter(dir, start, end string) error {
 		return errors.New("invalid date time range")
 	}
 
-	transactions, err := getTransactions(dir, startDate, endDate)
+	transactions, err := getTransactionsV2(dir, startDate, endDate)
 	if err != nil {
 		return err
 	}
@@ -123,17 +123,55 @@ func getTransactions(dir string, startDate, endDate time.Time) ([]Transaction, e
 		}
 
 		if firstIndex != -1 && lastIndex != -1 {
-			fmt.Println("First Index", firstIndex)
 			transactions = append(transactions, result[firstIndex:lastIndex]...)
 			break
 		} else if firstIndex != -1 && lastIndex == -1 {
 			transactions = append(transactions, result[firstIndex:]...)
 			firstIndex = 0
 			continue
-		} else {
-			break
 		}
 	}
+	return transactions, nil
+}
+
+func getTransactionsV2(dir string, startDate, endDate time.Time) ([]Transaction, error) {
+	files, err := getSortedFiles(dir)
+	if err != nil {
+		return nil, err
+	}
+
+	transactions := make([]Transaction, 0)
+
+	var firstIndex, lastIndex int = -1, -1
+
+	for _, file := range files {
+		filePath := dir + "/" + file
+		result, err := readReportFile(filePath)
+		if err != nil {
+			return nil, fmt.Errorf(`failed to read file "%s", error %v`, filePath, err)
+		}
+
+		firstRow := result[0]
+		lastRow := result[len(result)-1]
+
+		if firstIndex == -1 && dateBetween(startDate, firstRow.date, lastRow.date) {
+			firstIndex = searchTransactionByDate(result, startDate)
+		}
+
+		if lastIndex == -1 && dateBetween(endDate, firstRow.date, lastRow.date) {
+			lastIndex = searchTransactionByDate(result, endDate)
+		}
+
+		if firstIndex != -1 && lastIndex != -1 {
+			transactions = append(transactions, result[firstIndex:lastIndex]...)
+			break
+		} else if firstIndex != -1 && lastIndex == -1 {
+			transactions = append(transactions, result[firstIndex:]...)
+			firstIndex = 0
+			continue
+		}
+	}
+
 	return transactions, nil
 }
 
@@ -227,4 +265,10 @@ func writeToCSV(data []Transaction) error {
 	}
 
 	return nil
+}
+
+func dateBetween(target, start, end time.Time) bool {
+	afterEqual := target.After(start) || target.Equal(start)
+	beforeEqual := target.Before(end) || target.Equal(end)
+	return afterEqual && beforeEqual
 }

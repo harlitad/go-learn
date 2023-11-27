@@ -1,0 +1,26 @@
+goos: windows
+goarch: amd64
+pkg: filter
+cpu: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+BenchmarkGetTransactionsV1-12    	     854	   1394331 ns/op	  138763 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     810	   1489239 ns/op	  138763 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     826	   1442243 ns/op	  138763 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     812	   1571861 ns/op	  138766 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     794	   1556859 ns/op	  138761 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     631	   1652219 ns/op	  138764 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     698	   1657136 ns/op	  138765 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     804	   1476808 ns/op	  138766 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     831	   1481174 ns/op	  138767 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     804	   1416667 ns/op	  138765 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     819	   1424254 ns/op	  138761 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     787	   1729551 ns/op	  138764 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     792	   1471413 ns/op	  138763 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     670	   1579742 ns/op	  138769 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     759	   1432509 ns/op	  138765 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     783	   1465618 ns/op	  138764 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     828	   1464689 ns/op	  138764 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     835	   1401887 ns/op	  138766 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     831	   1426789 ns/op	  138768 B/op	     762 allocs/op
+BenchmarkGetTransactionsV1-12    	     852	   1449602 ns/op	  138764 B/op	     762 allocs/op
+PASS
+ok  	filter	27.476s

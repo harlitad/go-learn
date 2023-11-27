@@ -113,3 +113,52 @@ func TestSearchTransactionByDate(t *testing.T) {
 		assert.Equal(t, test.expected, index)
 	}
 }
+
+func TestGetTransactions(t *testing.T) {
+
+	testcases := []struct {
+		dir        string
+		start, end time.Time
+	}{
+		{"./reports", time.Date(2023, 8, 01, 00, 00, 00, 651387237, time.Local), time.Date(2023, 8, 18, 00, 00, 00, 651387237, time.Local)},
+	}
+	for _, test := range testcases {
+		res, err := getTransactions(test.dir, test.start, test.end)
+		assert.NoError(t, err)
+		assert.NotEmpty(t, res)
+		assert.Len(t, res, 17)
+	}
+}
+
+func TestGetTransactionsV2(t *testing.T) {
+
+	testcases := []struct {
+		dir        string
+		start, end time.Time
+	}{
+		{"./reports", time.Date(2023, 8, 01, 00, 00, 00, 651387237, time.Local), time.Date(2023, 8, 18, 00, 00, 00, 651387237, time.Local)},
+		{"./reports", time.Date(2023, 8, 01, 00, 00, 00, 651387237, time.Local), time.Date(2023, 8, 18, 00, 00, 00, 651387237, time.Local)},
+	}
+	for _, test := range testcases {
+		res, err := getTransactionsV2(test.dir, test.start, test.end)
+		assert.NoError(t, err)
+		assert.NotEmpty(t, res)
+		assert.Len(t, res, 17)
+	}
+}
+
+func BenchmarkGetTransactionsV2(b *testing.B) {
+	startDate := time.Date(2023, 04, 9, 00, 00, 00, 651387237, time.Local)
+	endDate := time.Date(2023, 10, 22, 00, 00, 00, 651387237, time.Local)
+	for i := 0; i < b.N; i++ {
+		getTransactionsV2("./reports", startDate, endDate)
+	}
+}
+
+func BenchmarkGetTransactionsV1(b *testing.B) {
+	startDate := time.Date(2023, 04, 9, 00, 00, 00, 651387237, time.Local)
+	endDate := time.Date(2023, 10, 22, 00, 00, 00, 651387237, time.Local)
+	for i := 0; i < b.N; i++ {
+		getTransactions("./reports", startDate, endDate)
+	}
+}
